@@ -30,10 +30,10 @@ const Writing = db.define(
       type: DataTypes.STRING,
     },
   },
-  {
-    // Freeze Table Name
-    freezeTableName: true,
-  },
+  //   {
+  //     // Freeze Table Name
+  //     freezeTableName: true,
+  //   },
 );
 
 // Export model Writing
