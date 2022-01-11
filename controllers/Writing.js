@@ -5,7 +5,7 @@ export const getWritings = async (req, res) => {
   try {
     // const writing = await Writing.findAll();
     const writing = await Writing.findAll({
-      attributes: ['title', 'description'],
+      attributes: ['id', 'title', 'description', 'image'],
     });
     // res.send(writing);
     return Responses.sendOk(res, writing);
