@@ -1,6 +1,5 @@
 // Import express
 import express from 'express';
-import path from 'path';
 // Import cors
 import cors from 'cors';
 // Import connection
@@ -14,9 +13,7 @@ const app = express();
 app.use(express.json());
 // use cors
 app.use(cors());
-// app.use('/uploads/image', express.static('public'));
 app.use(express.static('uploads/image'));
-// app.use('/static', express.static(path.join(__dirname, 'public')));
 // Testing database connection
 try {
   await db.authenticate();

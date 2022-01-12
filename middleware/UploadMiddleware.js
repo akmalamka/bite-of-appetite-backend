@@ -39,8 +39,7 @@ export const writingImageUploader = multer({
 
 export const uploadImage = (req, res, next) => {
   writingImageUploader.single('image')(req, res, (err) => {
-    console.log('req body', req.body);
-    console.log('req body', req.file);
+    console.log('req file', req.file.path);
     if (err) {
       // console.log('err ', err);
       if (err.message === 'File too large')
