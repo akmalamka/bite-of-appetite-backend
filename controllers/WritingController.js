@@ -68,6 +68,30 @@ export const deleteWriting = async (req, res) => {
   }
 };
 
+export const uploadWritingImage = async (req, res) => {
+  try {
+    const { activity } = req;
+    const poster = req.file.filename;
+
+    await activity.update({ poster });
+    return Responses.sendOk(res, poster);
+  } catch (err) {
+    return Responses.handleWriteError(res, err);
+  }
+};
+
+export const deleteWritingImage = async (req, res) => {
+  try {
+    const { activity } = req;
+    const poster = '';
+
+    await activity.update({ poster });
+    return Responses.sendOk(res, poster);
+  } catch (err) {
+    return Responses.handleWriteError(res, err);
+  }
+};
+
 // export default {
 //   getWritings,
 //   getWritingById,

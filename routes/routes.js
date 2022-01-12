@@ -7,6 +7,8 @@ import {
   createWriting,
   updateWriting,
   deleteWriting,
+  uploadWritingImage,
+  deleteWritingImage,
 } from '../controllers/WritingController.js';
 import {
   getRecipes,
@@ -15,6 +17,7 @@ import {
   updateRecipe,
   deleteRecipe,
 } from '../controllers/RecipeController.js';
+import { uploadImage } from '../middleware/UploadMiddleware.js';
 
 // Init express router
 const router = express.Router();
@@ -24,6 +27,9 @@ router.get('/writings/:id', getWritingById);
 router.post('/writings', createWriting);
 router.put('/writings/:id', updateWriting);
 router.delete('/writings/:id', deleteWriting);
+
+router.post('/writings/:id/image', uploadImage, uploadWritingImage);
+router.delete('/writings/:id/image', deleteWritingImage);
 router.get('/recipes', getRecipes);
 router.get('/recipes/:id', getRecipeById);
 router.post('/recipes', createRecipe);
