@@ -53,10 +53,10 @@ const Recipe = db.define(
       type: DataTypes.BOOLEAN,
     },
     ingredients: {
-      type: DataTypes.ARRAY(DataTypes.JSON),
+      type: DataTypes.JSON,
     },
     directions: {
-      type: DataTypes.ARRAY(DataTypes.JSON),
+      type: DataTypes.JSON,
     },
   },
   //   {

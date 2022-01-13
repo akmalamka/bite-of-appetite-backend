@@ -1,5 +1,6 @@
 import Writing from '../models/Writing.js';
 import Responses from '../utils/Responses.js';
+import { api } from '../utils/const.js';
 
 export const getWritings = async (req, res) => {
   try {
@@ -33,7 +34,18 @@ export const getWritingById = async (req, res) => {
 export const createWriting = async (req, res) => {
   try {
     await Writing.create(req.body);
-    return Responses.sendOk(res, 'Writing Created');
+    await Writing.findOne({
+      order: [['id', 'DESC']],
+    }).then((data) => {
+      // console.log('data ', data);
+      return Responses.sendOk(res, data);
+    });
+    // .catch((err) => {
+    //   return Responses.handleAllError(res, err);
+    // });
+    // console.log('body ', req.body);
+    // console.log('res ', res);
+    // return Responses.sendOk(res, 'Writing Created');
   } catch (err) {
     return Responses.handleAllError(res, err);
   }
@@ -41,11 +53,20 @@ export const createWriting = async (req, res) => {
 
 export const updateWriting = async (req, res) => {
   try {
-    await Writing.update(req.body, {
-      where: {
-        id: req.params.id,
+    await Writing.update(
+      {
+        description: req.body.description,
+        title: req.body.title,
+        writingsBy: req.body.writingsBy,
+        story: req.body.story,
+        date: req.body.date,
       },
-    });
+      {
+        where: {
+          id: req.params.id,
+        },
+      },
+    );
     return Responses.sendOk(res, 'Writing Updated');
   } catch (err) {
     return Responses.handleAllError(res, err);
@@ -55,9 +76,6 @@ export const updateWriting = async (req, res) => {
 export const deleteWriting = async (req, res) => {
   try {
     await Writing.destroy({
-      // truncate: true,
-      // cascade: false,
-      // restartIdentity: true,
       where: {
         id: req.params.id,
       },
@@ -70,11 +88,17 @@ export const deleteWriting = async (req, res) => {
 
 export const uploadWritingImage = async (req, res) => {
   try {
-    const { activity } = req;
-    const poster = req.file.filename;
+    const imageUrl = req.file.filename;
 
-    await activity.update({ poster });
-    return Responses.sendOk(res, poster);
+    await Writing.update(
+      { image: `${api}/${imageUrl}` },
+      {
+        where: {
+          id: req.params.id,
+        },
+      },
+    );
+    return Responses.sendOk(res, 'Image Updated');
   } catch (err) {
     return Responses.handleWriteError(res, err);
   }

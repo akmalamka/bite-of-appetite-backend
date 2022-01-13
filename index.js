@@ -13,7 +13,9 @@ const app = express();
 app.use(express.json());
 // use cors
 app.use(cors());
-app.use(express.static('uploads/image'));
+// app.use(express.static('uploads/writings'));
+// app.use(express.static('uploads/recipes'));
+app.use(express.static('photos'));
 // Testing database connection
 try {
   await db.authenticate();

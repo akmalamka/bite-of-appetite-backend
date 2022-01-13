@@ -10,7 +10,7 @@ export const filenameSetting = (_req, file, cb) => {
   cb(null, filename);
 };
 
-const imageExtension = ['jpeg', 'jpg', 'png'];
+const imageExtension = ['jpeg', 'jpg', 'png', 'JPG'];
 
 export const checkImage = (_req, file, cb) => {
   const filenameSplit = file.originalname.split('.');
@@ -20,28 +20,53 @@ export const checkImage = (_req, file, cb) => {
   return cb(null, true);
 };
 
-export const writingImageStorage = multer.diskStorage({
-  destination: (_req, _file, cb) => cb(null, path.resolve('uploads', 'image')),
+export const imageStorage = multer.diskStorage({
+  destination: (_req, _file, cb) => cb(null, 'photos'),
   // destination: (_req, _file, cb) => cb(null, path.join(__dirname, '/uploads')),
   filename: filenameSetting,
 });
 
-export const writingImageLimits = {
+// export const recipeImageStorage = multer.diskStorage({
+//   destination: (_req, _file, cb) =>
+//     cb(null, path.resolve('uploads', 'recipes')),
+//   // destination: (_req, _file, cb) => cb(null, path.join(__dirname, '/uploads')),
+//   filename: filenameSetting,
+// });
+
+export const imageLimits = {
   files: 1,
   //   fileSize: +Config.getEnv('IMAGE_SIZE_LIMIT'),
 };
 
-export const writingImageUploader = multer({
+// export const recipeImageUploader = multer({
+//   //   limits: writingImageLimits,
+//   storage: recipeImageStorage,
+//   fileFilter: checkImage,
+// });
+
+export const imageUploader = multer({
   //   limits: writingImageLimits,
-  storage: writingImageStorage,
+  storage: imageStorage,
   fileFilter: checkImage,
 });
 
+// export const uploadImageRecipe = (req, res, next) => {
+//   recipeImageUploader.single('image')(req, res, (err) => {
+//     console.log('aaa');
+//     console.log('req body ', req.body);
+//     if (err) {
+//       if (err.message === 'File too large')
+//         return Responses.sendBadRequest(res, err.message);
+//       return Responses.sendInternalError(res, `${err.name} : ${err.message}`);
+//     }
+//     next();
+//   });
+// };
+
 export const uploadImage = (req, res, next) => {
-  writingImageUploader.single('image')(req, res, (err) => {
-    console.log('req file', req.file.path);
+  imageUploader.single('image')(req, res, (err) => {
+    console.log('req body ', req.body);
     if (err) {
-      // console.log('err ', err);
       if (err.message === 'File too large')
         return Responses.sendBadRequest(res, err.message);
       return Responses.sendInternalError(res, `${err.name} : ${err.message}`);
