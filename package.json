@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index",
-    "server": "nodemon index"
+    "start": "node --experimental-modules index",
+    "server": "nodemon --experimental-modules index"
   },
   "author": "Muhammad Akmal",
   "license": "ISC",
