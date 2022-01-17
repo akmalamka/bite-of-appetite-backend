@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node --experimental-modules index",
-    "server": "nodemon --experimental-modules index"
+    "server": "node -r esm index"
   },
   "author": "Muhammad Akmal",
   "license": "ISC",
