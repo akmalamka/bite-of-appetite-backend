@@ -1,6 +1,4 @@
-// Import express
 import express from 'express';
-// import { RecipeController, WritingController } from '../controllers/index.js';
 import {
   getWritings,
   getWritingById,
@@ -21,7 +19,6 @@ import {
 } from '../controllers/RecipeController.js';
 import { uploadImage } from '../middleware/UploadMiddleware.js';
 
-// Init express router
 const router = express.Router();
 
 router.get('/writings', getWritings);

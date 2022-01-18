@@ -1,5 +1,4 @@
 import multer from 'multer';
-// import Config from '../configs/Config';
 import Responses from '../utils/Responses.js';
 
 export const filenameSetting = (_req, file, cb) => {
@@ -22,46 +21,19 @@ export const checkImage = (_req, file, cb) => {
 
 export const imageStorage = multer.diskStorage({
   destination: (_req, _file, cb) => cb(null, 'photos'),
-  // destination: (_req, _file, cb) => cb(null, path.join(__dirname, '/uploads')),
   filename: filenameSetting,
 });
-
-// export const recipeImageStorage = multer.diskStorage({
-//   destination: (_req, _file, cb) =>
-//     cb(null, path.resolve('uploads', 'recipes')),
-//   // destination: (_req, _file, cb) => cb(null, path.join(__dirname, '/uploads')),
-//   filename: filenameSetting,
-// });
 
 export const imageLimits = {
   files: 1,
   //   fileSize: +Config.getEnv('IMAGE_SIZE_LIMIT'),
 };
 
-// export const recipeImageUploader = multer({
-//   //   limits: writingImageLimits,
-//   storage: recipeImageStorage,
-//   fileFilter: checkImage,
-// });
-
 export const imageUploader = multer({
   //   limits: writingImageLimits,
   storage: imageStorage,
   fileFilter: checkImage,
 });
-
-// export const uploadImageRecipe = (req, res, next) => {
-//   recipeImageUploader.single('image')(req, res, (err) => {
-//     console.log('aaa');
-//     console.log('req body ', req.body);
-//     if (err) {
-//       if (err.message === 'File too large')
-//         return Responses.sendBadRequest(res, err.message);
-//       return Responses.sendInternalError(res, `${err.name} : ${err.message}`);
-//     }
-//     next();
-//   });
-// };
 
 export const uploadImage = (req, res, next) => {
   imageUploader.single('image')(req, res, (err) => {
