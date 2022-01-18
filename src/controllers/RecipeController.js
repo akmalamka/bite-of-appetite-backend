@@ -37,10 +37,8 @@ export const createRecipe = async (req, res) => {
     await Recipe.findOne({
       order: [['id', 'DESC']],
     }).then((data) => {
-      // console.log('data ', data);
       return Responses.sendOk(res, data);
     });
-    // return Responses.sendOk(res, 'Recipe Created');
   } catch (err) {
     return Responses.handleAllError(res, err);
   }
@@ -82,9 +80,6 @@ export const updateRecipe = async (req, res) => {
 export const deleteRecipe = async (req, res) => {
   try {
     await Recipe.destroy({
-      // truncate: true,
-      // cascade: false,
-      // restartIdentity: true,
       where: {
         id: req.params.id,
       },
@@ -125,11 +120,3 @@ export const deleteRecipeImage = async (req, res) => {
     return Responses.handleWriteError(res, err);
   }
 };
-
-// export default {
-//   getRecipes,
-//   getRecipeById,
-//   createRecipe,
-//   updateRecipe,
-//   deleteRecipe,
-// };

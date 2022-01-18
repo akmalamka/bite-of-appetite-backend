@@ -37,15 +37,8 @@ export const createWriting = async (req, res) => {
     await Writing.findOne({
       order: [['id', 'DESC']],
     }).then((data) => {
-      // console.log('data ', data);
       return Responses.sendOk(res, data);
     });
-    // .catch((err) => {
-    //   return Responses.handleAllError(res, err);
-    // });
-    // console.log('body ', req.body);
-    // console.log('res ', res);
-    // return Responses.sendOk(res, 'Writing Created');
   } catch (err) {
     return Responses.handleAllError(res, err);
   }
@@ -115,11 +108,3 @@ export const deleteWritingImage = async (req, res) => {
     return Responses.handleWriteError(res, err);
   }
 };
-
-// export default {
-//   getWritings,
-//   getWritingById,
-//   createWriting,
-//   updateWriting,
-//   deleteWriting,
-// };
