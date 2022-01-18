@@ -16,6 +16,9 @@ const Writing = db.define('writings', {
   writingsBy: {
     type: DataTypes.STRING,
   },
+  photographBy: {
+    type: DataTypes.STRING,
+  },
   story: {
     type: DataTypes.STRING,
   },
