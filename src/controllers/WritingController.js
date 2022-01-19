@@ -102,7 +102,7 @@ export const deleteWritingImage = async (req, res) => {
   const dir = 'photos/';
   const data = await Writing.findByPk(req.params.id);
   try {
-    fs.unlinkSync(dir + data.image.slice(22));
+    fs.unlinkSync(dir + data.image.slice(api.length + 1));
     //file removed
     return Responses.sendOk(res, 'Writing Image Deleted');
   } catch (err) {
