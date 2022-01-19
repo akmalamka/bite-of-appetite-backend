@@ -1,3 +1,4 @@
+import fs from 'fs';
 import Writing from '../models/Writing.js';
 import Responses from '../utils/Responses.js';
 import { api } from '../utils/const.js';
@@ -98,12 +99,12 @@ export const uploadWritingImage = async (req, res) => {
 };
 
 export const deleteWritingImage = async (req, res) => {
+  const dir = 'photos/';
+  const data = await Writing.findByPk(req.params.id);
   try {
-    const { activity } = req;
-    const poster = '';
-
-    await activity.update({ poster });
-    return Responses.sendOk(res, poster);
+    fs.unlinkSync(dir + data.image.slice(22));
+    //file removed
+    return Responses.sendOk(res, 'Writing Image Deleted');
   } catch (err) {
     return Responses.handleWriteError(res, err);
   }
