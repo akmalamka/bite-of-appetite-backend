@@ -110,12 +110,12 @@ export const uploadRecipeImage = async (req, res) => {
 };
 
 export const deleteRecipeImage = async (req, res) => {
+  const dir = 'photos/';
+  const data = await Recipe.findByPk(req.params.id);
   try {
-    const { activity } = req;
-    const poster = '';
-
-    await activity.update({ poster });
-    return Responses.sendOk(res, poster);
+    fs.unlinkSync(dir + data.image.slice(22));
+    //file removed
+    return Responses.sendOk(res, 'Recipe Image Deleted');
   } catch (err) {
     return Responses.handleWriteError(res, err);
   }

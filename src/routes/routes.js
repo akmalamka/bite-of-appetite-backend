@@ -31,6 +31,7 @@ router.post('/writings/:id/image', uploadImage, uploadWritingImage);
 router.post('/recipes/:id/image', uploadImage, uploadRecipeImage);
 router.delete('/writings/:id/image', deleteWritingImage);
 router.delete('/recipes/:id/image', deleteRecipeImage);
+
 router.get('/recipes', getRecipes);
 router.get('/recipes/:id', getRecipeById);
 router.post('/recipes', createRecipe);

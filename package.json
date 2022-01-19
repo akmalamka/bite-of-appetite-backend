@@ -11,6 +11,7 @@
   "author": "Muhammad Akmal",
   "license": "ISC",
   "dependencies": {
+    "@babel/plugin-transform-runtime": "^7.16.8",
     "cors": "^2.8.5",
     "esm": "^3.2.25",
     "express": "^4.17.2",
