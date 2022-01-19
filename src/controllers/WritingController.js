@@ -103,7 +103,6 @@ export const deleteWritingImage = async (req, res) => {
   const data = await Writing.findByPk(req.params.id);
   try {
     fs.unlinkSync(data.image.slice(api.length + 1));
-    console.log('path ', data.image.slice(api.length + 1));
     //file removed
     return Responses.sendOk(res, 'Writing Image Deleted');
   } catch (err) {
