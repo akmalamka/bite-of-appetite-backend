@@ -114,6 +114,7 @@ export const deleteRecipeImage = async (req, res) => {
   const data = await Recipe.findByPk(req.params.id);
   try {
     fs.unlinkSync(data.image.slice(api.length + 1));
+    console.log('path ', data.image.slice(api.length + 1));
     //file removed
     return Responses.sendOk(res, 'Recipe Image Deleted');
   } catch (err) {
