@@ -31,6 +31,25 @@ export const getRecipeById = async (req, res) => {
   }
 };
 
+export const getRecipeByName = async (req, res) => {
+  const title = req.params.recipeName.replaceAll('-', ' ');
+  try {
+    await Recipe.findOne({ where: { title: title } })
+      .then((data) => {
+        if (data) {
+          return Responses.sendOk(res, data);
+        } else {
+          return Responses.sendNotFound(res);
+        }
+      })
+      .catch((err) => {
+        return Responses.handleAllError(res, err);
+      });
+  } catch (err) {
+    return Responses.handleAllError(res, err);
+  }
+};
+
 export const createRecipe = async (req, res) => {
   try {
     await Recipe.create(req.body);

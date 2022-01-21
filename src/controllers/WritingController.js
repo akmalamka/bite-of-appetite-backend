@@ -32,6 +32,25 @@ export const getWritingById = async (req, res) => {
   }
 };
 
+export const getWritingByName = async (req, res) => {
+  const title = req.params.writingName.replaceAll('-', ' ');
+  try {
+    await Writing.findOne({ where: { title: title } })
+      .then((data) => {
+        if (data) {
+          return Responses.sendOk(res, data);
+        } else {
+          return Responses.sendNotFound(res);
+        }
+      })
+      .catch((err) => {
+        return Responses.handleAllError(res, err);
+      });
+  } catch (err) {
+    return Responses.handleAllError(res, err);
+  }
+};
+
 export const createWriting = async (req, res) => {
   try {
     await Writing.create(req.body);
