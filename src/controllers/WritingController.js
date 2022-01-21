@@ -33,9 +33,8 @@ export const getWritingById = async (req, res) => {
 };
 
 export const getWritingByName = async (req, res) => {
-  const title = req.params.writingName.replaceAll('-', ' ');
   try {
-    await Writing.findOne({ where: { title: title } })
+    await Writing.findOne({ where: { title: req.params.writingName } })
       .then((data) => {
         if (data) {
           return Responses.sendOk(res, data);

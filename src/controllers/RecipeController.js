@@ -32,9 +32,8 @@ export const getRecipeById = async (req, res) => {
 };
 
 export const getRecipeByName = async (req, res) => {
-  const title = req.params.recipeName.replaceAll('-', ' ');
   try {
-    await Recipe.findOne({ where: { title: title } })
+    await Recipe.findOne({ where: { title: req.params.recipeName } })
       .then((data) => {
         if (data) {
           return Responses.sendOk(res, data);
