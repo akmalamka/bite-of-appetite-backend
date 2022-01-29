@@ -70,6 +70,7 @@ export const updateWriting = async (req, res) => {
         description: req.body.description,
         title: req.body.title,
         writingsBy: req.body.writingsBy,
+        photographBy: req.body.photographBy,
         story: req.body.story,
         date: req.body.date,
       },
